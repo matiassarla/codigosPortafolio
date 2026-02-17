@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duplicar juicios de un período en otro</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <!-- <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"> -->
+     <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="encabezado">
+      <a href="index.html" class="home">🏠</a>
+      <h1>Duplicar juicios de un período en otro</h1>
+    </div>
+    <div class="codigo-container">
+      <button class="btn-copiar" onclick="copiar('script4', this)">
+        Copiar
+      </button>
+      <pre>
+        <code id="script4" class="language-javascript">
+document.querySelectorAll('tr.filaalumno').forEach(tr => {
+  // Buscar el juicio del Módulo Introductorio
+  const tdIntro = [...tr.querySelectorAll('td')].find(td =>
+    td.getAttribute('data-mescalif') === "Módulo<br/>Introductorio"
+  );
+
+  // Buscar el textarea del módulo introductorio
+  const introTextarea = tdIntro?.querySelector('textarea[name^="formHacerPromedios"]');
+  const juicio = introTextarea?.value?.trim();
+
+  // Buscar el td correspondiente a Abril
+  const tdAbr = [...tr.querySelectorAll('td')].find(td =>
+    td.getAttribute('data-mescalif') === "Abr"
+  );
+
+  // Buscar el textarea de abril y pegar el juicio
+  const abrTextarea = tdAbr?.querySelector('textarea[name^="formHacerPromedios"]');
+  if (juicio && abrTextarea) {
+    abrTextarea.value = juicio;
+
+    // Disparar eventos para que el sistema del sitio detecte el cambio
+    abrTextarea.dispatchEvent(new Event('input', { bubbles: true }));
+    abrTextarea.dispatchEvent(new Event('change', { bubbles: true }));
+  }
+});
+        </code>
+      </pre>
+    </div>
+    <script>
+      hljs.highlightAll();
+    </script>
+  </body>
+</html>

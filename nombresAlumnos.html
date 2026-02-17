@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obtener nombres de estudiantes para pegar en GSheets</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <!-- <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"> -->
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="encabezado">
+      <a href="index.html" class="home">🏠</a>
+      <h1>Obtener nombres de estudiantes para pegar en GSheets</h1>
+    </div>
+    <div class="codigo-container">
+      <button class="btn-copiar" onclick="copiar('script1', this)">
+        Copiar
+      </button>
+      <pre>
+        <code id="script1" class="language-javascript">
+(function() {
+
+  const resultado = Array.from(
+    document.querySelectorAll('tr.filaalumno div.datanombre')
+  )
+  .map(div => div.textContent.trim())
+  .map(texto => {
+    const match = texto.match(/^(\d+)\s+(.*)$/);
+    if (!match) return null;
+
+    let numero = match[1];
+    let nombre = match[2];
+
+    // Formatear número con 2 dígitos
+    if (numero.length === 1) {
+      numero = "0" + numero;
+    }
+
+    // Convertir nombre a "Capitalizado"
+    nombre = nombre
+      .toLowerCase()
+      .split(" ")
+      .map(palabra => 
+        palabra.charAt(0).toUpperCase() + palabra.slice(1)
+      )
+      .join(" ");
+
+    return `${numero} - ${nombre}`;
+  })
+  .filter(Boolean)
+  .join("\n");
+
+  // Copiar al portapapeles
+  const textarea = document.createElement("textarea");
+  textarea.value = resultado;
+  document.body.appendChild(textarea);
+  textarea.select();
+  document.execCommand("copy");
+  document.body.removeChild(textarea);
+
+  alert("Copiado al portapapeles ✅");
+
+})();
+        </code>
+      </pre>
+    </div>
+    <script>
+      hljs.highlightAll();
+    </script>
+  </body>
+</html>

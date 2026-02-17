@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copiar juicios de un período para pegar en GSheets</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <!-- <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"> -->
+     <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="encabezado">
+      <a href="index.html" class="home">🏠</a>
+      <h1>Copiar juicios de un período para pegar en GSheets</h1>
+    </div>
+    <div class="codigo-container">
+      <button class="btn-copiar" onclick="copiar('script5', this)">
+        Copiar
+      </button>
+      <pre>
+        <code id="script5" class="language-javascript">
+(function () {
+  const juicios = [];
+
+  document.querySelectorAll('tr.filaalumno').forEach(tr => {
+    const tdIntro = [...tr.querySelectorAll('td')].find(td =>
+      td.getAttribute('data-mescalif') === "Módulo<br/>Introductorio"
+    );
+
+    const introTextarea = tdIntro?.querySelector('textarea[name^="formHacerPromedios"]');
+    const juicio = introTextarea?.value?.trim();
+
+    juicios.push(juicio || "");
+  });
+
+  const textoFinal = juicios.join("\n");
+
+  // Crear textarea temporal
+  const textareaTemp = document.createElement("textarea");
+  textareaTemp.value = textoFinal;
+  document.body.appendChild(textareaTemp);
+
+  textareaTemp.select();
+  document.execCommand("copy");
+
+  document.body.removeChild(textareaTemp);
+
+  alert("Juicios copiados al portapapeles ✅");
+})();
+        </code>
+      </pre>
+    </div>
+    <script>
+      hljs.highlightAll();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fijar cuadros de texto de juicio a un tamaño específico</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <!-- <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"> -->
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="encabezado">
+      <a href="index.html" class="home">🏠</a>
+      <h1>Fijar cuadros de texto de juicio a un tamaño específico</h2>
+    </div>
+    <div class="codigo-container">
+      <button class="btn-copiar" onclick="copiar('script2', this)">
+        Copiar
+      </button>
+      <pre>
+        <code id="script2" class="language-javascript">
+function ajustarTextareas() {
+  document.querySelectorAll('textarea').forEach(t => {
+    const estilo = window.getComputedStyle(t);
+    const visible = estilo.display !== "none" && estilo.visibility !== "hidden" && t.offsetParent !== null;
+    if (visible) {
+      t.style.width = "150px";
+      t.style.height = "150px";
+    }
+  });
+}
+
+// Ajustar al inicio
+ajustarTextareas();
+
+// Observar cambios en el DOM y volver a ajustar
+const observer = new MutationObserver(() => {
+  ajustarTextareas();
+});
+
+observer.observe(document.body, {
+  childList: true,
+  subtree: true
+});
+        </code>
+      </pre>
+    </div>
+    <script>
+      hljs.highlightAll();
+    </script>
+  </body>
+</html>

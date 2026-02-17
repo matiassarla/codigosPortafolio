@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pegar el mismo juicio en estudiantes con la misma calificación</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <!-- <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"> -->
+     <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="encabezado">
+      <a href="index.html" class="home">🏠</a>
+      <h1>Pegar el mismo juicio en estudiantes con la misma calificación</h1>
+    </div>
+    <div class="codigo-container">
+      <button class="btn-copiar" onclick="copiar('script6', this)">
+        Copiar
+      </button>
+      <pre>
+        <code id="script6" class="language-javascript">
+let contador = 0;
+
+document.querySelectorAll("tr.filaalumno").forEach(fila => {
+
+  const td = fila.querySelector(
+    'td[data-mescalif="APE Febrero - Reunión Ficta EMB"]'
+  );
+  if (!td) return;
+
+  const notaDiv = td.querySelector(".evalcon");
+  const juicioDiv = td.querySelector(".evaljuicio");
+
+  if (!notaDiv || !juicioDiv) return;
+
+  // Intentar obtener nota desde input o texto
+  let nota = null;
+
+  const inputNota = notaDiv.querySelector("input");
+  if (inputNota) {
+    nota = parseFloat(inputNota.value.replace(",", "."));
+  } else {
+    nota = parseFloat(notaDiv.textContent.trim().replace(",", "."));
+  }
+
+  if (isNaN(nota)) return;
+
+  const texto = nota >= 5 ? "Acredita" : "No acredita";
+
+  // Intentar escribir en juicio como si el usuario escribiera
+  juicioDiv.focus();
+
+  const inputJuicio = juicioDiv.querySelector("input, textarea");
+
+  if (inputJuicio) {
+    inputJuicio.value = texto;
+    inputJuicio.dispatchEvent(new Event("input", { bubbles: true }));
+    inputJuicio.dispatchEvent(new Event("change", { bubbles: true }));
+  } else {
+    juicioDiv.textContent = texto;
+    juicioDiv.dispatchEvent(new Event("input", { bubbles: true }));
+    juicioDiv.dispatchEvent(new Event("blur", { bubbles: true }));
+  }
+
+  contador++;
+});
+
+console.log("Procesados:", contador);
+        </code>
+      </pre>
+    </div>
+    <script>
+      hljs.highlightAll();
+    </script>
+  </body>
+</html>

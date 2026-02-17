@@ -1,0 +1,56 @@
+<!-- <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sacar mayúsculas a los nombres de los estudiantes en GSheets</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+     <script src="script.js" defer></script>
+</head>
+<body>
+    <a href="index.html" class="home">🏠</a>
+    <h1>Sacar mayúsculas a los nombres de los estudiantes en GSheets</h1>
+    <div class="contenido">
+        <pre id="script2">
+function capitalizarNombresEnUnaHoja() {
+  const nombreHoja = "NombreDeTuHoja"; // <-- Cambiá esto por el nombre real de tu hoja
+  const hoja = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(nombreHoja);
+
+  if (!hoja) {
+    Logger.log("No se encontró la hoja con ese nombre.");
+    return;
+  }
+
+  const rango = hoja.getRange("A1:A" + hoja.getLastRow());
+  const valores = rango.getValues();
+
+  const nuevosValores = valores.map(fila => {
+    const texto = fila[0];
+    if (typeof texto === "string") {
+      const capitalizado = texto.toLowerCase().replace(/\b\w/g, c => c.toUpperCase());
+      return [capitalizado];
+    } else {
+      return [texto];
+    }
+  });
+
+  rango.setValues(nuevosValores);
+  SpreadsheetApp.flush();
+  Logger.log("Capitalización completada.");
+}
+
+        </pre>
+    </div>
+    <p>
+        🔧 Instrucciones:
+<br>
+1. Cambiá NombreDeTuHoja por el nombre real de la hoja donde están los nombres en mayúscula.
+<br>
+2. Pegá el script en Extensiones > Apps Script.
+<br>
+3. Ejecutá capitalizarNombresEnUnaHoja.
+    </p>
+    <button onclick="copiar('script2')">Copiar</button>
+</body>
+</html> -->
