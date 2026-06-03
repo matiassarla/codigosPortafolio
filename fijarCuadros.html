@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fijar cuadros de texto de juicio a un tamaño específico</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
@@ -14,23 +17,23 @@ href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-d
 </head>
 <body>
     <div class="encabezado">
-      <a href="index.html" class="home">🏠</a>
-      <h1>Fijar cuadros de texto de juicio a un tamaño específico</h2>
+      <!-- <a href="index.html"><img src="https://cdn-icons-png.flaticon.com/512/102/102061.png" class="home" alt="Volver al inicio"></a> -->
+      <h1>Fijar cuadros de texto de juicio a un tamaño específico</h1>
     </div>
     <div class="codigo-container">
-      <button class="btn-copiar" onclick="copiar('script2', this)">
-        Copiar
+      <button class="btn-copiar" onclick="copiar('script3', this)">
+        <img src="https://cdn-icons-png.flaticon.com/512/32/32565.png" class="icono" style="filter: invert(1);">Copiar código
       </button>
       <pre>
-        <code id="script2" class="language-javascript">
+        <code id="script3" class="language-javascript">
 <br>
 function ajustarTextareas() {
   document.querySelectorAll('textarea').forEach(t => {
     const estilo = window.getComputedStyle(t);
     const visible = estilo.display !== "none" && estilo.visibility !== "hidden" && t.offsetParent !== null;
     if (visible) {
-      t.style.width = "150px";
-      t.style.height = "150px";
+      t.style.width = "150px"; // Ajusta el ancho a 150px
+      t.style.height = "150px"; // Ajusta la altura a 150px
     }
   });
 }

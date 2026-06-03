@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duplicar juicios y notas de Módulo 1 en Módulo 3</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <!-- <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"> -->
+     <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="encabezado">
+      <!-- <a href="index.html"><img src="https://cdn-icons-png.flaticon.com/512/102/102061.png" class="home" alt="Volver al inicio"></a> -->
+      <h1>Duplicar juicios y notas de Módulo 1 en Módulo 3</h1>
+    </div>
+    <div class="codigo-container">
+      <button class="btn-copiar" onclick="copiar('script8', this)">
+        <img src="https://cdn-icons-png.flaticon.com/512/32/32565.png" class="icono" style="filter: invert(1);">Copiar código
+      </button>
+      <pre>
+        <code id="script8" class="language-javascript">
+<br>
+<!-- let juiciosCopiados = 0;
+let calificacionesCopiadas = 0;
+
+document.querySelectorAll('tr.filaalumno').forEach(tr => {
+
+  // Origen: Módulo 1
+  const tdIntro = tr.querySelector('td[data-periodo="10221384"]');
+  if (!tdIntro) return;
+
+  // Destino: Módulo 3
+  const tdAbr = tr.querySelector('td[data-periodo="10221387"]');
+  if (!tdAbr) return;
+
+  // =========================
+  // COPIAR JUICIO
+  // =========================
+
+  const introTextarea = tdIntro.querySelector('textarea[name^="formHacerPromedios"]');
+  const abrTextarea = tdAbr.querySelector('textarea[name^="formHacerPromedios"]');
+
+  if (introTextarea && abrTextarea) {
+    if (abrTextarea.value !== introTextarea.value) {
+      abrTextarea.value = introTextarea.value;
+
+      abrTextarea.dispatchEvent(new Event('input', { bubbles: true }));
+      abrTextarea.dispatchEvent(new Event('change', { bubbles: true }));
+
+      juiciosCopiados++;
+    }
+  }
+
+  // =========================
+  // COPIAR CALIFICACIÓN
+  // =========================
+
+  const notaOrigen = tdIntro.querySelector('.evalcon input');
+  const notaDestino = tdAbr.querySelector('.evalcon input');
+
+  if (notaOrigen && notaDestino) {
+    if (notaDestino.value !== notaOrigen.value) {
+      notaDestino.value = notaOrigen.value;
+
+      notaDestino.dispatchEvent(new Event('input', { bubbles: true }));
+      notaDestino.dispatchEvent(new Event('change', { bubbles: true }));
+
+      calificacionesCopiadas++;
+    }
+  }
+
+});
+
+console.log(`Juicios copiados: ${juiciosCopiados}`);
+console.log(`Calificaciones copiadas: ${calificacionesCopiadas}`);
+console.log(`Total de cambios realizados: ${juiciosCopiados + calificacionesCopiadas}`); -->
+let juiciosCopiados = 0;
+let calificacionesCopiadas = 0;
+
+document.querySelectorAll('tr.filaalumno').forEach(tr => {
+
+  // Origen: Módulo Introductorio
+  const tdIntro = tr.querySelector('td[data-mescalif="Módulo 1"]');
+  if (!tdIntro) return;
+
+  // Destino: Abril
+  const tdAbr = tr.querySelector('td[data-mescalif="Módulo 3"]');
+  if (!tdAbr) return;
+
+  // =========================
+  // COPIAR JUICIO
+  // =========================
+
+  const introTextarea = tdIntro.querySelector('textarea[name^="formHacerPromedios"]');
+  const abrTextarea = tdAbr.querySelector('textarea[name^="formHacerPromedios"]');
+
+  if (introTextarea && abrTextarea) {
+    if (abrTextarea.value !== introTextarea.value) {
+      abrTextarea.value = introTextarea.value;
+
+      abrTextarea.dispatchEvent(new Event('input', { bubbles: true }));
+      abrTextarea.dispatchEvent(new Event('change', { bubbles: true }));
+
+      juiciosCopiados++;
+    }
+  }
+
+  // =========================
+  // COPIAR CALIFICACIÓN
+  // =========================
+
+  const notaOrigen = tdIntro.querySelector('.evalcon input');
+  const notaDestino = tdAbr.querySelector('.evalcon input');
+
+  if (notaOrigen && notaDestino) {
+    if (notaDestino.value !== notaOrigen.value) {
+      notaDestino.value = notaOrigen.value;
+
+      notaDestino.dispatchEvent(new Event('input', { bubbles: true }));
+      notaDestino.dispatchEvent(new Event('change', { bubbles: true }));
+
+      calificacionesCopiadas++;
+    }
+  }
+
+});
+
+console.log(`Juicios copiados: ${juiciosCopiados}`);
+console.log(`Calificaciones copiadas: ${calificacionesCopiadas}`);
+console.log(`Total de cambios: ${juiciosCopiados + calificacionesCopiadas}`);
+        </code>
+      </pre>
+    </div>
+    <script>
+      hljs.highlightAll();
+    </script>
+  </body>
+</html>

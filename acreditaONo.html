@@ -18,24 +18,22 @@ href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-d
 <body>
     <div class="encabezado">
       <!-- <a href="index.html"><img src="https://cdn-icons-png.flaticon.com/512/102/102061.png" class="home" alt="Volver al inicio"></a> -->
-      <h1>Pegar el mismo juicio en estudiantes con la misma calificación</h1>
+      <h1>Acredita o No acredita según calificación</h1>
     </div>
     <div class="codigo-container">
-      <button class="btn-copiar" onclick="copiar('script6', this)">
+      <button class="btn-copiar" onclick="copiar('script7', this)">
         <img src="https://cdn-icons-png.flaticon.com/512/32/32565.png" class="icono" style="filter: invert(1);">Copiar código
       </button>
       <pre>
-        <code id="script6" class="language-javascript">
+        <code id="script7" class="language-javascript">
 <br>
 let contador = 0;
-let juiciosPorNota = {};
 
-// PRIMER RECORRIDO → guardar juicios existentes
 document.querySelectorAll("tr.filaalumno").forEach(fila => {
 
-  // Buscar el juicio del Módulo Introductorio (puede ser otro período, ajustar según necesidad)
+  // Buscar el juicio de APE Febrero (puede ser otro período, ajustar según necesidad)
   const td = fila.querySelector(
-    'td[data-mescalif="Módulo<br/>Introductorio"]' 
+    'td[data-mescalif="APE Febrero - Reunión Ficta EMB"]'
   );
   if (!td) return;
 
@@ -44,6 +42,7 @@ document.querySelectorAll("tr.filaalumno").forEach(fila => {
 
   if (!notaDiv || !juicioDiv) return;
 
+  // Intentar obtener nota desde input o texto
   let nota = null;
 
   const inputNota = notaDiv.querySelector("input");
@@ -55,62 +54,27 @@ document.querySelectorAll("tr.filaalumno").forEach(fila => {
 
   if (isNaN(nota)) return;
 
-  const inputJuicio = juicioDiv.querySelector("input, textarea");
-  let textoJuicio = "";
+  const texto = nota >= 5 ? "Acredita." : "No acredita.";
 
-  if (inputJuicio) {
-    textoJuicio = inputJuicio.value.trim();
-  } else {
-    textoJuicio = juicioDiv.textContent.trim();
-  }
-
-  if (textoJuicio !== "") {
-    juiciosPorNota[nota] = textoJuicio;
-  }
-});
-
-
-// SEGUNDO RECORRIDO → copiar juicios según nota
-document.querySelectorAll("tr.filaalumno").forEach(fila => {
-
-  const td = fila.querySelector(
-    'td[data-mescalif="Módulo<br/>Introductorio"]'
-  );
-  if (!td) return;
-
-  const notaDiv = td.querySelector(".evalcon");
-  const juicioDiv = td.querySelector(".evaljuicio");
-
-  if (!notaDiv || !juicioDiv) return;
-
-  let nota = null;
-
-  const inputNota = notaDiv.querySelector("input");
-  if (inputNota) {
-    nota = parseFloat(inputNota.value.replace(",", "."));
-  } else {
-    nota = parseFloat(notaDiv.textContent.trim().replace(",", "."));
-  }
-
-  if (isNaN(nota)) return;
-
-  if (!(nota in juiciosPorNota)) return;
-
-  const texto = juiciosPorNota[nota];
+  // Intentar escribir en juicio como si el usuario escribiera
+  juicioDiv.focus();
 
   const inputJuicio = juicioDiv.querySelector("input, textarea");
 
   if (inputJuicio) {
-    if (inputJuicio.value.trim() === "") {
-      inputJuicio.value = texto;
-      inputJuicio.dispatchEvent(new Event("input", { bubbles: true }));
-      inputJuicio.dispatchEvent(new Event("change", { bubbles: true }));
-      contador++;
-    }
+    inputJuicio.value = texto;
+    inputJuicio.dispatchEvent(new Event("input", { bubbles: true }));
+    inputJuicio.dispatchEvent(new Event("change", { bubbles: true }));
+  } else {
+    juicioDiv.textContent = texto;
+    juicioDiv.dispatchEvent(new Event("input", { bubbles: true }));
+    juicioDiv.dispatchEvent(new Event("blur", { bubbles: true }));
   }
+
+  contador++;
 });
 
-console.log("Juicios duplicados:", contador);
+console.log("Procesados:", contador);
         </code>
       </pre>
     </div>

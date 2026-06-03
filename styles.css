@@ -5,14 +5,21 @@ body {
 }
 
 h1 {
-    font-family: poppins, sans-serif;
-    font-size: 2.7rem;
-    color: #ffffff;
-    padding: 30px;
-    margin-top: 0;
-    padding-bottom: 0;
+    flex-direction: column;
+    /* justify-content: space-between; */
+    align-items: center;
     text-align: center;
-    
+    margin: auto;
+    font-family: poppins, sans-serif;
+    font-size: 2.2rem;
+    color: #ffffff;
+    padding: 15px;
+    margin: 0;
+    text-align: center;
+}
+
+.encabezado h1 {
+    font-size: 1.8rem;
 }
 
 .codigo-container {
@@ -22,81 +29,54 @@ h1 {
     display: block;
     /* flex-direction: column; */
     justify-content: space-between;
-    margin: auto;
+    margin: 0 auto;
     align-items: center;
 }
 
 h2 {
-    font-family: sans-serif;
-    font-size: 1.4rem;
+    font-family: poppins, sans-serif;
+    font-size: 1.2rem;
     color: #000000c9;
     background-color: #f4f4f4;
-    padding: 10px;
-    border: 3px solid #f4f4f4;
+    padding: 4px;
+    border: 1px solid #f4f4f4;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     display: block;
-    margin: 10px auto;
+    margin: 4px auto;
     text-align: center;
 }
 
-.home {
-    text-decoration: none;
-    font-family: sans-serif;
-    font-size: medium;
-    font-weight: bold;
-    color: #2600FF;
-    background-color: #f4f4f4;
-    margin-top: 10px;
-    margin-left: 10px;
-    padding: 5px;
-    border: 3px solid #f4f4f4;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    display: inline-block;
-}
-
 pre {
-    /* margin: 0; */
     border-radius: 10px;
     overflow-x: auto;
-    padding: 5px;
-    /* font-family: 'Times New Roman', Times, serif;
-    font-size: medium;
-    font-weight: bold;
-    color: #ffffff;
-    background-color: #000000;
-    margin-top: 10px;
-    margin-left: 10px;
-    padding: 5px;
-    border: 3px solid #f4f4f4;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    display: inline-block; */
+    padding: 0px;
+    margin: 0;
 }
 
 pre code.hljs {
     box-sizing: border-box;
-    border-radius: 15px;
+    border-radius: 10px;
 }
 
 .btn-copiar {
     position: absolute;
-    top: 30px;
-    right: 12px;
+    top: 15px;
+    right: 0px;
     background-color: rgba(255,255,255,0.15);
     color: white;
     border: 1px solid rgba(255,255,255,0.3);
-    padding: 5px 10px;
-    border-radius: 6px;
+    padding: 5px;
+    border-radius: 10px;
     cursor: pointer;
     font-size: 0.8rem;
     backdrop-filter: blur(4px);
-    transition: 0.2s ease;
+    transition: 0.5s ease;
 }
 
 .btn-copiar:hover {
-    background-color: rgba(255,255,255,0.3);
+    background-color: rgba(0, 255, 55, 0.171);
+    /* transform: translateY(-2px); */
 }
 
 a {
@@ -105,25 +85,26 @@ a {
 
 .encabezado {
     position: relative;
-    /* width: max-content; */
     max-width: 100%;
     display: block;
-    /* flex-direction: column; */
-    /* justify-content: space-between; */
     margin: 0;
     /* align-items: center; */
-}
-
-.encabezado a {
-    position: absolute;
-    top: 5px;
-    left: 5px;
-}
-
-.encabezado h1 {
-    flex-direction: column;
+    /* flex-direction: column; */
     /* justify-content: space-between; */
-    align-items: center;
-    text-align: center;
-    margin: auto;
+    /* width: max-content; */
+}
+
+/* .encabezado a {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+} */
+
+.icono {
+  height: 1em;      /* mismo alto que el texto */
+  width: auto;      /* mantiene proporción */
+  vertical-align: middle;
+  padding-right: 5px; /* espacio entre icono y texto */
+  margin: 0px;
+  height: clamp(14px, 1em, 22px);
 }
